@@ -1,6 +1,6 @@
-#import <React/RCTEventEmitter.h>
-#import <React/RCTBridge.h>
+#import <EXCore/EXExportedModule.h>
+#import <EXCore/EXModuleRegistryConsumer.h>
 
-@interface EXSpeech : RCTEventEmitter
+@interface EXSpeech : EXExportedModule <EXModuleRegistryConsumer>
 
 @end
