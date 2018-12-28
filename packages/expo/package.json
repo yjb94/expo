@@ -95,6 +95,7 @@
     "expo-sensors": "~2.0.0-rc.2",
     "expo-sensors-interface": "~2.0.0-rc.1",
     "expo-sms": "~2.0.0-rc.2",
+    "expo-speech": "~1.0.0",
     "expo-task-manager": "~1.0.0-rc.2",
     "fbemitter": "^2.1.1",
     "invariant": "^2.2.2",

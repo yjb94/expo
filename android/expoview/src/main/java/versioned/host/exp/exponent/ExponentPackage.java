@@ -51,7 +51,6 @@ import versioned.host.exp.exponent.modules.api.SQLiteModule;
 import versioned.host.exp.exponent.modules.api.ScreenOrientationModule;
 import versioned.host.exp.exponent.modules.api.screens.RNScreensPackage;
 import versioned.host.exp.exponent.modules.api.ShakeModule;
-import versioned.host.exp.exponent.modules.api.SpeechModule;
 import versioned.host.exp.exponent.modules.api.URLHandlerModule;
 import versioned.host.exp.exponent.modules.api.WebBrowserModule;
 import versioned.host.exp.exponent.modules.api.av.AVModule;
@@ -186,7 +185,6 @@ public class ExponentPackage implements ReactPackage {
         nativeModules.add(new ErrorRecoveryModule(reactContext, experienceId));
         nativeModules.add(new IntentLauncherModule(reactContext));
         nativeModules.add(new ScreenOrientationModule(reactContext));
-        nativeModules.add(new SpeechModule(reactContext));
         nativeModules.add(new SecureStoreModule(reactContext, scopedContext));
         nativeModules.add(new BrightnessModule(reactContext));
         nativeModules.add(new RNGestureHandlerModule(reactContext));

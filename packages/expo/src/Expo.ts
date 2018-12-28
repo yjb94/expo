@@ -37,6 +37,7 @@ export { Print } from 'expo-print';
 export { Accelerometer, Gyroscope, Magnetometer, MagnetometerUncalibrated } from 'expo-sensors';
 import * as SMS from 'expo-sms';
 export { SMS };
+export { Speech } from 'expo-speech';
 import * as TaskManager from 'expo-task-manager';
 export { TaskManager }
 export { GestureHandler } from './GestureHandler';
@@ -77,8 +78,6 @@ import * as ScreenOrientation from './ScreenOrientation/ScreenOrientation';
 export { ScreenOrientation };
 import * as SecureStore from './SecureStore/SecureStore';
 export { SecureStore };
-import * as Speech from './Speech/Speech';
-export { Speech };
 import * as StoreReview from './StoreReview/StoreReview';
 export { StoreReview };
 export { default as Svg } from './Svg';

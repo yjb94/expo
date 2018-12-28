@@ -64,6 +64,7 @@ def includeUniversalModule = { name ->
   'expo-sensors',
   'expo-sensors-interface',
   'expo-sms',
+  'expo-speech',
   'expo-task-manager',
   'expo-task-manager-interface'
 ].forEach({ moduleName -> includeUniversalModule(moduleName) })

@@ -28,6 +28,7 @@ import expo.modules.permissions.PermissionsPackage;
 import expo.modules.print.PrintPackage;
 import expo.modules.sensors.SensorsPackage;
 import expo.modules.sms.SMSPackage;
+import expo.modules.speech.SpeechPackage;
 import expo.modules.taskManager.TaskManagerPackage;
 
 public class ExperiencePackagePicker {
@@ -41,6 +42,7 @@ public class ExperiencePackagePicker {
       new GoogleSignInPackage(),
       new PermissionsPackage(),
       new SMSPackage(),
+      new SpeechPackage(),
       new PrintPackage(),
       new MediaLibraryPackage(),
       new SegmentPackage(),

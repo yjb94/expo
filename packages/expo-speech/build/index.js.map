@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,MAAM,iBAAiB,CAAC;AAC1C,OAAO,EAAE,MAAM,EAAE,CAAC","sourcesContent":["import * as Speech from './Speech/Speech';\nexport { Speech };\n"]}
