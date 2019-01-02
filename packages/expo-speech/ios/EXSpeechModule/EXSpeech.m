@@ -46,6 +46,14 @@ EX_EXPORT_MODULE(ExponentSpeech)
   return @[@"Exponent.speakingStarted", @"Exponent.speakingDone", @"Exponent.speakingStopped", @"Exponent.speakingError"];
 }
 
+- (void)startObserving {
+}
+
+
+- (void)stopObserving {
+}
+
+
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer
   didStartSpeechUtterance:(AVSpeechUtterance *)utterance
 {
@@ -74,59 +82,72 @@ EX_EXPORT_MODULE(ExponentSpeech)
 }
 
 
-  EX_EXPORT_METHOD_AS(speak,
-                      speak:(nonnull NSString *)utteranceId
-                       text:(nonnull NSString *)text
+EX_EXPORT_METHOD_AS(speak,
+                    speak:(nonnull NSString *)utteranceId
+                    text:(nonnull NSString *)text
                     options:(NSDictionary *)options
-                   resolver:(EXPromiseResolveBlock)resolve
-                   rejecter:(EXPromiseRejectBlock)reject) {
-    if (_synthesizer == nil) {
-      _synthesizer = [[AVSpeechSynthesizer alloc] init];
-      _synthesizer.delegate = self;
-    }
-    
-    AVSpeechUtterance *utterance = [[EXSpeechUtteranceWithId alloc] initWithString:text utteranceId:utteranceId];
-    
-    NSString *language = options[@"language"];
-    NSString *voice = options[@"voiceIOS"];
-    NSNumber *pitch = options[@"pitch"];
-    NSNumber *rate = options[@"rate"];
-    
-    if (language != nil) {
-      utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:language];
-    }
-    if (voice != nil) {
-      utterance.voice = [AVSpeechSynthesisVoice voiceWithIdentifier:voice];
-    }
-    if (pitch != nil) {
-      utterance.pitchMultiplier = [pitch floatValue];
-    }
-    if (rate != nil) {
-      utterance.rate = [rate floatValue] * AVSpeechUtteranceDefaultSpeechRate;
-    }
-    
-    [_synthesizer speakUtterance:utterance];
-    resolve(nil);
-  }
-  
-  EX_EXPORT_METHOD_AS(stop, stop: (EXPromiseResolveBlock)resolve rejecter:(EXPromiseRejectBlock)reject) {
-    [_synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-    resolve(nil);
+                    resolver:(EXPromiseResolveBlock)resolve
+                    rejecter:(EXPromiseRejectBlock)reject) {
+  if (_synthesizer == nil) {
+    _synthesizer = [[AVSpeechSynthesizer alloc] init];
+    _synthesizer.delegate = self;
   }
 
-  EX_EXPORT_METHOD_AS(pause, pause: (EXPromiseResolveBlock)resolve rejecter:(EXPromiseRejectBlock)reject) {
-    [_synthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-    resolve(nil);
+  AVSpeechUtterance *utterance = [[EXSpeechUtteranceWithId alloc] initWithString:text utteranceId:utteranceId];
+
+  NSString *language = options[@"language"];
+  NSString *voice = options[@"voiceIOS"];
+  NSNumber *pitch = options[@"pitch"];
+  NSNumber *rate = options[@"rate"];
+
+  if (language != nil) {
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:language];
+  }
+  if (voice != nil) {
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithIdentifier:voice];
+  }
+  if (pitch != nil) {
+    utterance.pitchMultiplier = [pitch floatValue];
+  }
+  if (rate != nil) {
+    utterance.rate = [rate floatValue] * AVSpeechUtteranceDefaultSpeechRate;
   }
 
-  EX_EXPORT_METHOD_AS(resume, resume: (EXPromiseResolveBlock)resolve rejecter:(EXPromiseRejectBlock)reject) {
-    [_synthesizer continueSpeaking];
-    resolve(nil);
-  }
-  
-  EX_EXPORT_METHOD_AS(isSpeaking, isSpeaking:(EXPromiseResolveBlock)resolve rejecter:(EXPromiseRejectBlock)reject) {
-    resolve(@([_synthesizer isSpeaking]));
-  }
-  
-  @end
+  [_synthesizer speakUtterance:utterance];
+  resolve(nil);
+}
+
+EX_EXPORT_METHOD_AS(stop,
+                    stop:(EXPromiseResolveBlock)resolve
+                    rejecter:(EXPromiseRejectBlock)reject) {
+  [_synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+  resolve(nil);
+}
+
+EX_EXPORT_METHOD_AS(pause,
+                    pause:(EXPromiseResolveBlock)resolve
+                    rejecter:(EXPromiseRejectBlock)reject) {
+  [_synthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+  resolve(nil);
+}
+
+EX_EXPORT_METHOD_AS(resume,
+                    resume:(EXPromiseResolveBlock)resolve
+                    rejecter:(EXPromiseRejectBlock)reject) {
+  [_synthesizer continueSpeaking];
+  resolve(nil);
+}
+
+EX_EXPORT_METHOD_AS(isSpeaking,
+                    isSpeaking:(EXPromiseResolveBlock)resolve
+                    rejecter:(EXPromiseRejectBlock)reject) {
+  resolve(@([_synthesizer isSpeaking]));
+}
+
++ (const NSArray<Protocol *> *)exportedInterfaces {
+  return @[];
+}
+
+
+@end
   

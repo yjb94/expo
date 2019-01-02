@@ -74,7 +74,6 @@ export function pause(): Promise<void> {
   if (!ExponentSpeech.pause) {
     throw new UnavailabilityError('Speech', 'pause');
   }
-
   return ExponentSpeech.pause();
 }
 
