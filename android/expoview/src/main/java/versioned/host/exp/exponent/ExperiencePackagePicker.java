@@ -19,6 +19,7 @@ import expo.modules.filesystem.FileSystemPackage;
 import expo.modules.font.FontLoaderPackage;
 import expo.modules.gl.GLPackage;
 import expo.modules.google.signin.GoogleSignInPackage;
+import expo.modules.keepawake.KeepAwakePackage;
 import expo.modules.localauthentication.LocalAuthenticationPackage;
 import expo.modules.localization.LocalizationPackage;
 import expo.modules.location.LocationPackage;
@@ -50,6 +51,7 @@ public class ExperiencePackagePicker {
       new BarCodeScannerPackage(),
       new AdMobPackage(),
       new StripePackage(),
+      new KeepAwakePackage(),
       new LocalAuthenticationPackage(),
       new LocalizationPackage(),
       new AppAuthPackage(),
