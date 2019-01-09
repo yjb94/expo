@@ -61,7 +61,7 @@ public class SpeechModule extends ExportedModule implements ModuleRegistryConsum
   private void speakOut(final String id, final String text, final Map<String, Object> options) {
     TextToSpeech textToSpeech = getTextToSpeech();
     if (options.containsKey("language")) {
-      Locale locale = new Locale((String)options.get("language"));
+      Locale locale = new Locale((String) options.get("language"));
       int languageAvailable = textToSpeech.isLanguageAvailable(locale);
       if (languageAvailable != TextToSpeech.LANG_MISSING_DATA &&
           languageAvailable != TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -73,10 +73,10 @@ public class SpeechModule extends ExportedModule implements ModuleRegistryConsum
       textToSpeech.setLanguage(Locale.getDefault());
     }
     if (options.containsKey("pitch")) {
-      textToSpeech.setPitch(((Double)options.get("pitch")).floatValue());
+      textToSpeech.setPitch(((Number) options.get("pitch")).floatValue());
     }
     if (options.containsKey("rate")) {
-      textToSpeech.setSpeechRate(((Double)options.get("rate")).floatValue());
+      textToSpeech.setSpeechRate(((Number) options.get("rate")).floatValue());
     }
 
     textToSpeech.speak(
@@ -93,7 +93,7 @@ public class SpeechModule extends ExportedModule implements ModuleRegistryConsum
   }
 
   @ExpoMethod
-  public void stop(final Promise promise ) {
+  public void stop(final Promise promise) {
     getTextToSpeech().stop();
     promise.resolve(null);
   }

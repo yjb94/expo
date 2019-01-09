@@ -57,7 +57,7 @@ EX_EXPORT_MODULE(ExponentSpeech)
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer
   didStartSpeechUtterance:(AVSpeechUtterance *)utterance
 {
-  id<EXEventEmitterService> emiter = [_moduleRegistry getModuleImplementingProtocol:@protocol(EXEventEmitterService)];
+  id<EXEventEmitterService> emitter = [_moduleRegistry getModuleImplementingProtocol:@protocol(EXEventEmitterService)];
   if (emiter != nil) {
     [emiter sendEventWithName:@"Exponent.speakingStarted" body:@{ @"id": ((EXSpeechUtteranceWithId *) utterance).utteranceId }];
   }
@@ -66,7 +66,7 @@ EX_EXPORT_MODULE(ExponentSpeech)
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer
  didCancelSpeechUtterance:(AVSpeechUtterance *)utterance
 {
-  id<EXEventEmitterService> emiter = [_moduleRegistry getModuleImplementingProtocol:@protocol(EXEventEmitterService)];
+  id<EXEventEmitterService> emitter = [_moduleRegistry getModuleImplementingProtocol:@protocol(EXEventEmitterService)];
   if (emiter != nil) {
     [emiter sendEventWithName:@"Exponent.speakingStopped" body:@{ @"id": ((EXSpeechUtteranceWithId *) utterance).utteranceId }];
   }
@@ -75,7 +75,7 @@ EX_EXPORT_MODULE(ExponentSpeech)
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer
  didFinishSpeechUtterance:(AVSpeechUtterance *)utterance
 {
-  id<EXEventEmitterService> emiter = [_moduleRegistry getModuleImplementingProtocol:@protocol(EXEventEmitterService)];
+  id<EXEventEmitterService> emitter = [_moduleRegistry getModuleImplementingProtocol:@protocol(EXEventEmitterService)];
   if (emiter != nil) {
     [emiter sendEventWithName:@"Exponent.speakingDone" body:@{ @"id": ((EXSpeechUtteranceWithId *) utterance).utteranceId }];
   }
