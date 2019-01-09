@@ -1,87 +1,76 @@
 // Copyright 2018-present 650 Industries. All rights reserved.
 
+#import <EXCore/EXModuleRegistry.h>
 #import <EXKeepAwake/EXKeepAwake.h>
+#import <EXCore/EXAppLifecycleService.h>
+#import <EXCore/EXUtilities.h>
 
-@implementation EXKeepAwake
+@interface EXKeepAwake () <EXAppLifecycleListener>
+
+@property (nonatomic, weak) id<EXAppLifecycleService> lifecycleManager;
+@property (nonatomic, weak) EXModuleRegistry *moduleRegistry;
+
 @end
 
-// // Copyright 2015-present 650 Industries. All rights reserved.
+@implementation EXKeepAwake {
+  BOOL _active;
+}
 
-// #import <React/RCTBridgeModule.h>
+EX_EXPORT_MODULE(ExpoKeepAwake);
 
-// @interface EXKeepAwake : NSObject<RCTBridgeModule>
+# pragma mark - EXModuleRegistryConsumer
 
-// @end
+- (void)setModuleRegistry:(EXModuleRegistry *)moduleRegistry
+{
+  if (_moduleRegistry) {
+    [_lifecycleManager unregisterAppLifecycleListener:self];
+  }
+  
+  _lifecycleManager = nil;
+  
+  if (moduleRegistry) {
+    _lifecycleManager = [moduleRegistry getModuleImplementingProtocol:@protocol(EXAppLifecycleService)];
+  }
+  
+  if (_lifecycleManager) {
+    [_lifecycleManager registerAppLifecycleListener:self];
+  }
+}
 
+EX_EXPORT_METHOD_AS(activate, activate:(EXPromiseResolveBlock)resolve
+                    reject:(EXPromiseRejectBlock)reject)
+{
+  _active = YES;
+  [EXUtilities performSynchronouslyOnMainThread:^{
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+  }];
+  resolve(@YES);
+}
 
+EX_EXPORT_METHOD_AS(deactivate, deactivate:(EXPromiseResolveBlock)resolve
+                    reject:(EXPromiseRejectBlock)reject)
+{
+  _active = NO;
+  [EXUtilities performSynchronouslyOnMainThread:^{
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+  }];
+  resolve(@YES);
+}
 
-// // Copyright 2015-present 650 Industries. All rights reserved.
+# pragma mark - EXAppLifecycleListener
 
-// #import "EXKeepAwake.h"
-// #import "EXUnversioned.h"
-// #import "EXUtil.h"
+- (void)onAppBackgrounded {
+  [EXUtilities performSynchronouslyOnMainThread:^{
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+  }];
+}
 
-// #import <UIKit/UIKit.h>
+- (void)onAppForegrounded {
+  if (_active) {
+    [EXUtilities performSynchronouslyOnMainThread:^{
+      [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    }];
+  }
+}
 
-// @implementation EXKeepAwake
-// {
-//   BOOL _active;
-// }
-
-// @synthesize bridge = _bridge;
-
-// RCT_EXPORT_MODULE(ExponentKeepAwake);
-
-// - (void)setBridge:(RCTBridge *)bridge
-// {
-//   _bridge = bridge;
-//   _active = NO;
-
-//   [[NSNotificationCenter defaultCenter] addObserver:self
-//                                            selector:@selector(bridgeDidForeground:)
-//                                                name:EX_UNVERSIONED(@"EXKernelBridgeDidForegroundNotification")
-//                                              object:bridge];
-//   [[NSNotificationCenter defaultCenter] addObserver:self
-//                                            selector:@selector(bridgeDidBackground:)
-//                                                name:EX_UNVERSIONED(@"EXKernelBridgeDidBackgroundNotification")
-//                                              object:bridge];
-// }
-
-// - (void)dealloc
-// {
-//   [[NSNotificationCenter defaultCenter] removeObserver:self];
-// }
-
-// RCT_EXPORT_METHOD(activate)
-// {
-//   _active = YES;
-//   [EXUtil performSynchronouslyOnMainThread:^{
-//     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-//   }];
-// }
-
-// RCT_EXPORT_METHOD(deactivate)
-// {
-//   _active = NO;
-//   [EXUtil performSynchronouslyOnMainThread:^{
-//     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-//   }];
-// }
-
-// - (void)bridgeDidForeground:(NSNotification *)notification
-// {
-//   if (_active) {
-//     [EXUtil performSynchronouslyOnMainThread:^{
-//       [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-//     }];
-//   }
-// }
-
-// - (void)bridgeDidBackground:(NSNotification *)notification
-// {
-//   [EXUtil performSynchronouslyOnMainThread:^{
-//     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-//   }];
-// }
-
-// @end
+@end

@@ -1,4 +1,7 @@
 // Copyright 2018-present 650 Industries. All rights reserved.
 
-@interface EXKeepAwake : NSObject
+#import <EXCore/EXExportedModule.h>
+#import <EXCore/EXModuleRegistryConsumer.h>
+
+@interface EXKeepAwake : EXExportedModule <EXModuleRegistryConsumer>
 @end

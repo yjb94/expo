@@ -1,17 +1,17 @@
 import React from 'react';
 
-import ExponentKeepAwake from './ExponentKeepAwake';
+import ExpoKeepAwake from './ExpoKeepAwake';
 
 export default class KeepAwake extends React.PureComponent {
   static activate = activate;
   static deactivate = deactivate;
 
   componentDidMount() {
-    ExponentKeepAwake.activate();
+    ExpoKeepAwake.activate();
   }
 
   componentWillUnmount() {
-    ExponentKeepAwake.deactivate();
+    ExpoKeepAwake.deactivate();
   }
 
   render() {
@@ -20,9 +20,9 @@ export default class KeepAwake extends React.PureComponent {
 }
 
 export function activate() {
-  ExponentKeepAwake.activate();
+  ExpoKeepAwake.activate();
 }
 
 export function deactivate() {
-  ExponentKeepAwake.deactivate();
+  ExpoKeepAwake.deactivate();
 }

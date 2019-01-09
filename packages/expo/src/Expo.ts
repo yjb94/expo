@@ -67,7 +67,7 @@ import * as ImagePicker from './ImagePicker/ImagePicker';
 export { ImagePicker };
 import * as IntentLauncherAndroid from './IntentLauncherAndroid/IntentLauncherAndroid';
 export { IntentLauncherAndroid };
-export { default as KeepAwake } from './KeepAwake';
+export { KeepAwake } from 'expo-keep-awake';
 export { default as Linking } from './Linking';
 import * as MailComposer from './MailComposer/MailComposer';
 export { MailComposer };
