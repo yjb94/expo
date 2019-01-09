@@ -197,6 +197,7 @@ dependencies {
   api project(':expo-google-sign-in')
   api project(':expo-image-loader-interface')
   api project(':expo-keep-awake')
+  api project(':expo-linear-gradient')
   api project(':expo-local-authentication')
   api project(':expo-localization')
   api project(':expo-location')

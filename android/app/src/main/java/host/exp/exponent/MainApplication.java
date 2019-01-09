@@ -22,6 +22,7 @@ import expo.modules.font.FontLoaderPackage;
 import expo.modules.gl.GLPackage;
 import expo.modules.google.signin.GoogleSignInPackage;
 import expo.modules.keepawake.KeepAwakePackage;
+import expo.modules.lineargradient.LinearGradientPackage;
 import expo.modules.localauthentication.LocalAuthenticationPackage;
 import expo.modules.localization.LocalizationPackage;
 import expo.modules.location.LocationPackage;
@@ -70,6 +71,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
         new MediaLibraryPackage(),
         new SegmentPackage(),
         new FontLoaderPackage(),
+        new LinearGradientPackage(),
         new LocationPackage(),
         new ContactsPackage(),
         new BarCodeScannerPackage(),
