@@ -2,27 +2,45 @@
 
 #import "EXLinearGradientManager.h"
 #import "EXLinearGradient.h"
-#import <React/RCTBridge.h>
+#import <EXCore/EXUIManager.h>
+
+@interface EXLinearGradientManager ()
+
+@end
 
 @implementation EXLinearGradientManager
 
-RCT_EXPORT_MODULE(ExponentLinearGradientManager);
+EX_EXPORT_MODULE(EXLinearGradientManager);
 
-@synthesize bridge = _bridge;
+- (dispatch_queue_t)methodQueue
+{
+  return dispatch_get_main_queue();
+}
+
+- (NSString *)viewName
+{
+  return @"ExpoLinearGradient";
+}
 
 - (UIView *)view
 {
   return [[EXLinearGradient alloc] init];
 }
 
-- (dispatch_queue_t)methodQueue
-{
-    return dispatch_get_main_queue();
+EX_VIEW_PROPERTY(colors, NSArray *, EXLinearGradient) {
+  [view setColors:value];
 }
 
-RCT_EXPORT_VIEW_PROPERTY(colors, NSArray);
-RCT_EXPORT_VIEW_PROPERTY(startPoint, CGPoint);
-RCT_EXPORT_VIEW_PROPERTY(endPoint, CGPoint);
-RCT_EXPORT_VIEW_PROPERTY(locations, NSArray);
+EX_VIEW_PROPERTY(startPoint, CGPoint, EXLinearGradient) {
+  [view setStartPoint:value];
+}
+
+EX_VIEW_PROPERTY(endPoint, CGPoint, EXLinearGradient) {
+  [view setEndPoint:value];
+}
+
+EX_VIEW_PROPERTY(locations, NSArray *, EXLinearGradient) {
+  [view setLocations:value];
+}
 
 @end

@@ -6,4 +6,9 @@
 
 @interface EXLinearGradient : UIView
 
+- (void)setColors:(NSArray *)colorStrings;
+- (void)setLocations:(NSArray *)locations;
+- (void)setStartPoint:(CGPoint)start;
+- (void)setEndPoint:(CGPoint)end;
+
 @end

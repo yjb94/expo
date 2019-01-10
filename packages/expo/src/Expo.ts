@@ -93,7 +93,7 @@ import * as Audio from './av/Audio';
 export { Audio };
 export { default as Video } from './av/Video';
 export { default as BlurView } from './effects/BlurView';
-export { default as LinearGradient } from './effects/LinearGradient';
+export { LinearGradient } from 'expo-linear-gradient';
 import * as FacebookAds from './facebook-ads';
 export { FacebookAds };
 export { default as AppLoading } from './launch/AppLoading';
